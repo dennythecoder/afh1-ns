@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/dennis.headrick/Desktop/afh1-ns/dist/node_modules/nativescript-webview-interface/platforms/android/WebViewInterface.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="76c82949e18be2e64a13fcf1587898f426846790">
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1/debug/WebViewInterface_6f4188cb32ea4a8905e92111bcd4bb2ba6aa1334.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/dennis.headrick/.android/build-cache/57189b545c5444137e3639e655d11e0079dff7ce/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="746274223beb11b1cda7854d7eec3038695c2c93">
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1/debug/classes_facb7da5f543054b0b33e6c58f4d0c123dd4c8d7.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,9 @@
+{
+    "nativescript-fontawesome": true,
+    "nativescript-fonticon": true,
+    "nativescript-theme-core": true,
+    "nativescript-vue": true,
+    "nativescript-webview-interface": true,
+    "tns-core-modules": true,
+    "tns-core-modules-widgets": true
+}

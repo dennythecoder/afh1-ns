@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/design_snackbar_in.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/design_snackbar_out.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_fade_out.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/anim/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/anim/abc_fade_in.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/anim/abc_fade_in.xml"
+    }
+]

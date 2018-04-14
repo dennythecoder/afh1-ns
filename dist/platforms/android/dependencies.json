@@ -1,0 +1,30 @@
+[
+    {
+        "name": "nativescript-fontawesome",
+        "directory": "../../node_modules/nativescript-fontawesome"
+    },
+    {
+        "name": "nativescript-fonticon",
+        "directory": "../../node_modules/nativescript-fonticon"
+    },
+    {
+        "name": "nativescript-theme-core",
+        "directory": "../../node_modules/nativescript-theme-core"
+    },
+    {
+        "name": "nativescript-vue",
+        "directory": "../../node_modules/nativescript-vue"
+    },
+    {
+        "name": "nativescript-webview-interface",
+        "directory": "../../node_modules/nativescript-webview-interface"
+    },
+    {
+        "name": "tns-core-modules",
+        "directory": "../../node_modules/tns-core-modules"
+    },
+    {
+        "name": "tns-core-modules-widgets",
+        "directory": "../../node_modules/tns-core-modules-widgets"
+    }
+]

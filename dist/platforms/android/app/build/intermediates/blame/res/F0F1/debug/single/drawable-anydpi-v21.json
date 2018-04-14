@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/drawable-anydpi-v21/design_ic_visibility_off.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/drawable-anydpi-v21/design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/drawable-anydpi-v21/design_ic_visibility.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/drawable-anydpi-v21/design_ic_visibility.xml"
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/design_tint_password_toggle.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/color-v23/design_tint_password_toggle.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/color-v23/abc_btn_colored_text_material.xml"
+    }
+]
