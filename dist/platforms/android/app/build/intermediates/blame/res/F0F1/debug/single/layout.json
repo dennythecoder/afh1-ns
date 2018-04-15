@@ -24,12 +24,12 @@
         "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/layout/design_navigation_item_header.xml"
     },
     {
-        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/layout/notification_action.xml",
-        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/layout/notification_action.xml"
-    },
-    {
         "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/layout/design_navigation_item_separator.xml",
         "source": "/Users/dennis.headrick/.android/build-cache/9189c6439c194119c536d79cbc6bd24c1658cabe/output/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/layout/notification_action.xml",
+        "source": "/Users/dennis.headrick/.android/build-cache/69d53a89b6a0477a348e4dd8168a3aceecd2b6c8/output/res/layout/notification_action.xml"
     },
     {
         "merged": "/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/res/merged/F0F1/debug/layout/abc_action_menu_item_layout.xml",

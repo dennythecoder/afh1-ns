@@ -1,6 +1,6 @@
-/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/index.js
-/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/nativescript-webview-interface.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/app.js
+/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/index.js
+/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/nativescript-webview-interface.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-webview-interface/index.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-webview-interface/index-common.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-webview-interface/www/nativescript-webview-interface.js
