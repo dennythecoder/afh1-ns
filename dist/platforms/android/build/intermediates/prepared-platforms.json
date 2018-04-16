@@ -2,6 +2,7 @@
     "nativescript-fontawesome": true,
     "nativescript-fonticon": true,
     "nativescript-theme-core": true,
+    "nativescript-toast": true,
     "nativescript-vue": true,
     "nativescript-webview-interface": true,
     "tns-core-modules": true,

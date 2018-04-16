@@ -12,7 +12,8 @@
     "tns-core-modules": "~3.4.1",
     "nativescript-webview-interface": "^1.4.2",
     "nativescript-fontawesome": "^1.0.0",
-    "nativescript-fonticon": "^1.1.1"
+    "nativescript-fonticon": "^1.1.1",
+    "nativescript-toast": "^1.4.6"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",

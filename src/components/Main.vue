@@ -2,8 +2,9 @@
   <Page class="page" ref="page">
     <ActionBar :visibility="mode === 'home' ? 'collapsed' : 'visible'" class="action-bar" title="AFH-1">
       <WrapLayout>
-        <Button :text="'fa-home' | fonticon" class="fa ab" @tap="mode='home'" />
-        <Button :text="'fa-bars' | fonticon" class="fa ab" @tap="mode='chapters'" />
+        <Button :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
+        <Button :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
+        <Button :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
       </WrapLayout>
     </ActionBar>
   <StackLayout>  
@@ -14,21 +15,25 @@
 
 
         <Image v-show="mode==='home'"  src="~/images/af_logo.png" />
-        <Label v-show="mode==='home'"  id="handbook-1-title" text="Handbook 1 (2017)" />
-        <ListView  v-show="mode==='home'" for="route in routes" style="height:100%" >
+        <Label v-show="mode==='home'"  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
+        <ListView  v-show="mode==='home'" for="route in routes" style="height:100%;" >
           <v-template>
-            <Button class="list-button" :text="route.name" @tap="mode=route.mode"/>
+            <Button class="list-button" :text="route.name" @tap="goto(route.mode)"/>
           </v-template>
         </ListView>
 
       <!--search --> 
-    
-      <TextField v-show="mode==='search'" v-model="searchTerm" />
-      <ListView v-show="mode==='search'" for="result in searchResults">
-        <v-template>
-          <Button class="list-button" :text="result.shortResult | shorten" @tap="onSearchResultTap(result)" />
-        </v-template>
-      </ListView>
+      <StackLayout v-show="mode==='search'">
+        <TextField  v-model="searchTerm" />
+        <ListView  for="result in searchResults" style="height:100%">
+          <v-template>
+            <Button class="list-button" :text="result.shortResult" @tap="onSearchResultTap(result)" />
+          </v-template>
+        </ListView>
+
+
+      </StackLayout>
+
       
    
       <!--chapters -->
@@ -38,7 +43,12 @@
         </v-template>
       </ListView>
 
-      
+      <!--Bookmarks -->
+      <ListView for="bookmark in bookmarks" v-show="mode==='bookmarks'">
+        <v-template>
+          <Button class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" />
+        </v-template>
+      </ListView>
 
       <!--reader
         the reader stays loaded to preserve state and load with app
@@ -83,8 +93,20 @@ WebView {
 <script>
 import * as webViewModule from "tns-core-modules/ui/web-view";
 import webViewInterfaceModule from "nativescript-webview-interface";
-import appSettings from "tns-core-modules/application-settings";
+//import appSettings from "tns-core-modules/application-settings";
+import * as application from "tns-core-modules/application";
+import Toast from "nativescript-toast";
+import {
+  AndroidApplication,
+  AndroidActivityBackPressedEventData
+} from "tns-core-modules/application";
 import chapters from "../scripts/chapters";
+
+var appSettings = require("application-settings");
+
+var bookmarks = appSettings.getString("bookmarks");
+bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
+
 
 export default {
   data() {
@@ -94,12 +116,13 @@ export default {
       src: "~/www/afh1.html",
       isInitialized: false,
       searchTerm: "",
-      searchResults: []
+      searchResults: [],
+      navigatedRoutes: ["home"],
+      isReadyToClose: false,
+      bookmarks:bookmarks
     };
   },
-  filters: {
-    shorten(text) {}
-  },
+
   computed: {
     chapters() {
       return chapters;
@@ -108,7 +131,8 @@ export default {
       return [
         { name: "Chapters", mode: "chapters" },
         { name: "Continue Reading", mode: "reader" },
-        { name: "Search", mode: "search" }
+        { name: "Search", mode: "search" },
+        { name: "Bookmarks", mode: "bookmarks"}
       ];
     }
   },
@@ -121,14 +145,40 @@ export default {
   },
 
   methods: {
+    goto(mode) {
+      this.mode = mode;
+      this.navigatedRoutes.push(mode);
+      this.isReadyToClose = false;
+    },
+    goBack() {
+      if (this.navigatedRoutes.length >= 2) {
+        this.navigatedRoutes.splice(this.navigatedRoutes.length - 1, 1);
+        this.mode = this.navigatedRoutes[this.navigatedRoutes.length - 1];
+      }
+    },
+
+    createBookmark(){
+      this.oWebViewInterface.emit('twCreateBookmark');
+    },
     shorten(text) {
       return text.length > 140 ? text.substr(0, 140) + "..." : text;
     },
     onChapterTap(chapter) {
       this.updateHash(chapter.id);
-      this.mode = "reader";
+      this.goto("reader");
+    },
+    onBookmarkTap(bookmark) {
+      this.updateHash('bm-' + bookmark.selector);
+      this.goto("reader");
+    },
+    onCreateBookmark(bookmark){
+      this.bookmarks.push(bookmark);
+      
+      appSettings.setString("bookmarks", JSON.stringify(this.bookmarks));
+      Toast.makeText("Bookmark Created").show();
     },
     onSearch(results) {
+      alert(results[0] ? results[0].shortResponse : 'nothing');
       this.$set(this, "searchResults", results);
     },
 
@@ -148,10 +198,27 @@ export default {
         setTimeout(this.onWebViewLoad, 100);
         return;
       }
+
+    
+
+      if (this._handlersApplied === true) return;
+      this._handlersApplied = true;
       if (android) {
         android.getSettings().setAllowFileAccess(true);
         android.getSettings().setAllowFileAccessFromFileURLs(true);
         android.getSettings().setDisplayZoomControls(false);
+
+        application.android.on(
+          AndroidApplication.activityBackPressedEvent,
+          data => {
+            if (this.navigatedRoutes.length >= 2) {
+              data.cancel = true;
+              this.goBack();
+            } else {
+              //let it exit
+            }
+          }
+        );
       }
 
       this.oWebViewInterface = new webViewInterfaceModule.WebViewInterface(
