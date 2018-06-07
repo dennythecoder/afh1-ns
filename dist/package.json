@@ -5,11 +5,11 @@
   "readme": "Air Force Handbook 1",
   "nativescript": {
     "id": "mil.af.aetc.afh1",
-    "tns-android": {
-      "version": "3.4.2"
-    },
     "tns-ios": {
       "version": "3.4.1"
+    },
+    "tns-android": {
+      "version": "3.4.2"
     }
   },
   "dependencies": {

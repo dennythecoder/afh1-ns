@@ -1,4 +1,4 @@
-com.shripalsoni.natiescriptwebviewinterface.WebViewInterface*_fapp_l1_c138170__*onWebViewEvent***
+com.shripalsoni.natiescriptwebviewinterface.WebViewInterface*_fapp_l1_c138585__*onWebViewEvent***
 com.shripalsoni.natiescriptwebviewinterface.WebViewInterface*_ftns_modules_nativescript_webview_interface_index_l10_c96__*onWebViewEvent***
 common.WebViewInterface*_frnal_ts_helpers_l58_c38__WebViewInterface*_initWebView,_setAndroidWebViewSettings,_executeJS***
 fontawesome_common_1.Common*_frnal_ts_helpers_l58_c38__Fontawesome****
@@ -88,8 +88,8 @@ wrap_layout_common_1.WrapLayoutBase*_frnal_ts_helpers_l58_c38__WrapLayout*create
 absolute_layout_common_1.AbsoluteLayoutBase*_frnal_ts_helpers_l58_c38__AbsoluteLayout*createNativeView***
 layout_base_1.LayoutBase*_frnal_ts_helpers_l58_c38__AbsoluteLayoutBase*getLeft,setLeft,getTop,setTop,onLeftChanged,onTopChanged***
 flexbox_layout_common_1.FlexboxLayoutBase*_frnal_ts_helpers_l58_c38__FlexboxLayout*createNativeView,resetNativeView,,,,,,,,,,,_updateNativeLayoutParams,_setChildMinWidthNative,_setChildMinHeightNative***
-layout_base_1.LayoutBase*_frnal_ts_helpers_l58_c38__DockLayoutBase*getDock,setDock,onDockChanged***
 layout_base_1.LayoutBase*_frnal_ts_helpers_l58_c38__FlexboxLayoutBase*setOrder,getOrder,setFlexGrow,getFlexGrow,setFlexShrink,getFlexShrink,setAlignSelf,getAlignSelf,setFlexWrapBefore,getFlexWrapBefore***
+layout_base_1.LayoutBase*_frnal_ts_helpers_l58_c38__DockLayoutBase*getDock,setDock,onDockChanged***
 dock_layout_common_1.DockLayoutBase*_frnal_ts_helpers_l58_c38__DockLayout*createNativeView,,***
 layout_base_1.LayoutBase*_frnal_ts_helpers_l58_c38__StackLayoutBase****
 stack_layout_common_1.StackLayoutBase*_frnal_ts_helpers_l58_c38__StackLayout*createNativeView,***

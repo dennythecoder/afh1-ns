@@ -2,6 +2,9 @@ var obWebviewInterface = window.nsWebViewInterface;
 
 obWebviewInterface.on("twUpdateHash", function(hash) {
 
+
+  window.location.hash = "#" + hash;
+  /*
   if(hash.indexOf('bm') !== -1){
     var selector = hash.split('bm-')[1];
     debug(selector);
@@ -12,7 +15,7 @@ obWebviewInterface.on("twUpdateHash", function(hash) {
   }else{
     window.location.hash = "#" + hash;
   }
-
+*/
   
   
   
@@ -50,10 +53,12 @@ function removeSearch() {
 
 var paragraphs,
   markInstance,
-  bodyText;
+  bodyText,
+  chapters;
 document.addEventListener("DOMContentLoaded", function() {
   bodyText = document.body.innerText;
   markInstance = new Mark(document.body);
+  chapters = document.querySelectorAll("[id^='chapter']");
 });
 
 obWebviewInterface.on("twSearch", function(searchTerm) {
@@ -81,6 +86,7 @@ obWebviewInterface.on("twSearch", function(searchTerm) {
 
 
   var els = document.querySelectorAll('mark');
+ 
   for(var i= 0; i < els.length; i++){
     els[i].id = 'sr-' + i; 
     searchResults.push({
@@ -127,9 +133,9 @@ function getVisibleElement(){
 	return document.body;
 }
 function getChapterOfElement(el){
-	document.querySelectorAll('h2').forEach(a=>a.className = 'chapter')
-	var chapters = document.getElementsByClassName('chapter');
-	if(chapters.length === 0) return document.createElement("div");
+	// document.querySelectorAll('h2').forEach(a=>a.className = 'chapter')
+
+	if(chapters && chapters.length === 0) return document.createElement("div");
 	for(let i = 0; chapters.length - 1; i++){
 	
 		if(chapters[i].offsetTop > el.offsetTop && i > 0){
@@ -152,7 +158,8 @@ function createBookmark(){
 		scrollY,
 		percentage,
 		chapter: chapter.textContent.trim(),
-		selector: unique(el)
+    selector: el.id,
+    id:el.id
 	})
 }
 

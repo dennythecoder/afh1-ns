@@ -3,21 +3,21 @@
 
     <item
         is-multidex="false"
+        jar="/Users/dennis.headrick/.android/build-cache/2493dc2a60e04ddf08cde0252af55fa0bbcfa903/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.3"
+        sha1="746274223beb11b1cda7854d7eec3038695c2c93">
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1/debug/classes_8bcbd3bba2e3d4417962f8a0b5a6de0839a3aca8.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/dennis.headrick/Desktop/afh1-ns/dist/node_modules/nativescript-webview-interface/platforms/android/WebViewInterface.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
         sha1="76c82949e18be2e64a13fcf1587898f426846790">
         <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1/debug/WebViewInterface_6f4188cb32ea4a8905e92111bcd4bb2ba6aa1334.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/dennis.headrick/.android/build-cache/292acc4228e6d27c4e6dc9e8fb2c76147a3888ae/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="26.0.3"
-        sha1="746274223beb11b1cda7854d7eec3038695c2c93">
-        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1/debug/classes_373f181b7f40914d40a6e3d4c4cff58e8bf6e6b3.jar" />
     </item>
 
 </items>

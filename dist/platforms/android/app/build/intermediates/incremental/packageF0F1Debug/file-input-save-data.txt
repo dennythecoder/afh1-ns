@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Apr 14 23:38:00 CDT 2018
+#Sun Apr 15 21:48:39 CDT 2018
 1073.file=/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/assets/F0F1/debug/app/www/afh1_files/image138.png
 1090.base=/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/assets/F0F1/debug
 1007.base=/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/assets/F0F1/debug

@@ -1,6 +1,6 @@
 <template>
-  <Page class="page" ref="page">
-    <ActionBar :visibility="mode === 'home' ? 'collapsed' : 'visible'" class="action-bar" title="AFH-1">
+  <Page class="page" ref="page" @loaded="onLoaded">
+    <ActionBar :visibility="mode === 'home' ? 'collapsed' : 'visible'" style="background-color:#00529b;" title="AFH-1">
       <WrapLayout>
         <Button :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
         <Button :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
@@ -20,7 +20,7 @@
           <v-template>
             <Button class="list-button" :text="route.name" @tap="goto(route.mode)"/>
           </v-template>
-        </ListView>
+       </ListView>
 
       <!--search --> 
       <StackLayout v-show="mode==='search'">
@@ -78,6 +78,8 @@ WebView {
   height: 100%;
 }
 
+
+
 #handbook-1-title {
   font-size: 18em;
   text-align: center;
@@ -86,6 +88,10 @@ WebView {
 .ab {
   background-color: #00529b;
   color: white;
+}
+
+.action-bar{
+  background-color: #00529b;
 }
 </style>
 
@@ -128,12 +134,17 @@ export default {
       return chapters;
     },
     routes() {
-      return [
+
+      let routes = [
         { name: "Chapters", mode: "chapters" },
         { name: "Continue Reading", mode: "reader" },
-        { name: "Search", mode: "search" },
-        { name: "Bookmarks", mode: "bookmarks"}
+      /*  { name: "Search", mode: "search" },*/
+        
       ];
+      if(this.bookmarks.length > 0){
+        routes.push( { name: "Bookmarks", mode: "bookmarks"});
+      }
+      return routes;
     }
   },
   watch: {
@@ -145,6 +156,19 @@ export default {
   },
 
   methods: {
+    onLoaded(args){
+     /*
+      const platform = require("platform");
+      const color = require("color");
+      const page = args.object;
+      page.bindingContext = data;
+      const View = android.view.View;*/
+      /*
+      const app = require("application");
+      if(app.android && platform.device.sdkVersion >= '21'){
+        const window = app.android.startActivity;
+      }*/
+    },
     goto(mode) {
       this.mode = mode;
       this.navigatedRoutes.push(mode);
@@ -168,7 +192,7 @@ export default {
       this.goto("reader");
     },
     onBookmarkTap(bookmark) {
-      this.updateHash('bm-' + bookmark.selector);
+      this.updateHash(bookmark.id);
       this.goto("reader");
     },
     onCreateBookmark(bookmark){
@@ -219,6 +243,11 @@ export default {
             }
           }
         );
+
+        /*
+        const activity = application.android.startActivity;
+        const win = activity.getWindow();
+        win.addFlags(android.viewWindowManager.LayoutParams.FLAG_FULLSCREEN);*/
       }
 
       this.oWebViewInterface = new webViewInterfaceModule.WebViewInterface(
@@ -230,7 +259,8 @@ export default {
       this.oWebViewInterface.on("tnDebug", function(text) {
         alert(text);
       });
-    }
+    }  
+
   }
 };
 </script>
