@@ -1,18 +1,17 @@
 <template>
   <Page class="page" ref="page" @loaded="onLoaded">
-    <ActionBar :visibility="mode === 'home' ? 'collapsed' : 'visible'" style="background-color:#00529b;" title="AFH-1">
-      <WrapLayout>
+    <ActionBar style="background-color:#00529b;" title="">
+      <!--using v-if instead of v-show creates error here-->
+      <WrapLayout v-show="mode !=='home'">
         <Button :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
         <Button :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
         <Button :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
       </WrapLayout>
     </ActionBar>
-  <StackLayout>  
-
-    
-
+     <GridLayout>
+  
+       <StackLayout>
       <!-- home -->
-
 
         <Image v-show="mode==='home'"  src="~/images/af_logo.png" />
         <Label v-show="mode==='home'"  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
@@ -31,7 +30,6 @@
           </v-template>
         </ListView>
 
-
       </StackLayout>
 
       
@@ -46,20 +44,36 @@
       <!--Bookmarks -->
       <ListView for="bookmark in bookmarks" v-show="mode==='bookmarks'">
         <v-template>
-          <Button class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" />
+          <Button class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)"/>
         </v-template>
       </ListView>
-
       <!--reader
         the reader stays loaded to preserve state and load with app
       -->
       <WebView id="webView" ref="webView" src="" @loadFinished="onWebViewLoad" />
-   </StackLayout>
 
-
+     </StackLayout>
+        
+      <AbsoluteLayout row="0" class="sweet-button">
+        <Button   text="Hey"></Button>
+      </AbsoluteLayout>
+   </GridLayout>
+   
+ 
+    
   </Page>
 </template>
 <style>
+
+.sweet-button{
+  position:absolute;
+  right:10px;
+  bottom:20px;
+  height:10px;
+  width:10px;
+  z-index:4003;
+}
+
 Image {
   width: 80%;
   margin: auto;
@@ -138,7 +152,7 @@ export default {
       let routes = [
         { name: "Chapters", mode: "chapters" },
         { name: "Continue Reading", mode: "reader" },
-      /*  { name: "Search", mode: "search" },*/
+        { name: "Search", mode: "search" }
         
       ];
       if(this.bookmarks.length > 0){
@@ -191,18 +205,37 @@ export default {
       this.updateHash(chapter.id);
       this.goto("reader");
     },
+    onSearchResultTap(searchResult){
+      this.updateHash(searchResult.id);
+      this.goto("reader");
+    },
     onBookmarkTap(bookmark) {
       this.updateHash(bookmark.id);
       this.goto("reader");
     },
+    onBookmarkLongPress(bookmark){
+      confirm("Would you like to delete this bookmark?").then((result)=>{
+        if(result){
+          for(var i = 0; i < this.bookmarks.length; i++){
+            if(bookmark === this.bookmarks[i]){
+              this.bookmarks.splice(i);
+              appSettings.setString("bookmarks", JSON.stringify(this.bookmarks));
+              Toast.makeText("Bookmark Deleted").show();
+              if(this.bookmarks.length === 0){
+                this.mode = 'home';
+              }
+            }
+          }
+        }
+      });
+    },
     onCreateBookmark(bookmark){
       this.bookmarks.push(bookmark);
-      
+
       appSettings.setString("bookmarks", JSON.stringify(this.bookmarks));
       Toast.makeText("Bookmark Created").show();
     },
     onSearch(results) {
-      alert(results[0] ? results[0].shortResponse : 'nothing');
       this.$set(this, "searchResults", results);
     },
 

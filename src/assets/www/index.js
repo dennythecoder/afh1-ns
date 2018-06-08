@@ -1,25 +1,50 @@
 var obWebviewInterface = window.nsWebViewInterface;
 
 obWebviewInterface.on("twUpdateHash", function(hash) {
-
-
-  window.location.hash = "#" + hash;
-  /*
-  if(hash.indexOf('bm') !== -1){
-    var selector = hash.split('bm-')[1];
-    debug(selector);
-    var el = document.querySelector(selector);
-    var id = 'bm-' + new Date().getTime();
-    el.id = id;
-    window.location.hash = '#' + id;
-  }else{
-    window.location.hash = "#" + hash;
-  }
-*/
-  
-  
-  
+  var el = document.getElementById(hash);
+  var top = el.offsetTop;
+  window.scroll(0,top);  
 });
+
+var nodes = [];
+var textContents = []
+
+document.addEventListener('DOMContentLoaded',function(){
+  var childNodes = document.getElementById('DIV-0').childNodes;
+  for(var i = 0; i < childNodes.length; i++){
+    var textContent = childNodes[i].textContent;
+    var temp = textContent.replace(/\s|\n|\r\n/ig,'');
+    if(temp.length > 0){
+      nodes.push(childNodes[i]);
+      textContents.push(textContent);
+    }
+  }
+  textContents = textContents
+    .map(function(f){ return f.replace(/[\n]/ig,' ')})
+    .map(function(f){ return f.toLowerCase()});
+});
+
+function searchNodesForText(searchText){
+  var text = searchText.toLowerCase();
+  var results = [];
+
+  for(var i = 0; i < textContents.length; i++){
+    var tIdx = textContents[i].indexOf(text);
+    if(tIdx !== -1){
+      var result = new HighlightMeta(nodes[i], nodes[i],  text,  text.length,tIdx, textContents[i]);
+      results.push(result);
+    }
+  }
+  return results;
+}
+
+
+
+
+
+
+
+
 
 function strip(html) {
   const doc = new DOMParser().parseFromString(html, "text/html");
@@ -50,19 +75,19 @@ function removeSearch() {
     highlights[i].outerHTML = highlights[i].innerHTML;
   }
 }
+var bodyText,chapters;
 
-var paragraphs,
-  markInstance,
-  bodyText,
-  chapters;
 document.addEventListener("DOMContentLoaded", function() {
-  bodyText = document.body.innerText;
-  markInstance = new Mark(document.body);
+  bodyText = document.body.textContent,
   chapters = document.querySelectorAll("[id^='chapter']");
 });
 
-obWebviewInterface.on("twSearch", function(searchTerm) {
+function markTerm(searchTerm) {
 
+  
+  var markInstance = new Mark(document.body);
+    
+ 
   removeSearch();
   var searchResults = [];
 
@@ -81,22 +106,34 @@ obWebviewInterface.on("twSearch", function(searchTerm) {
 
 
   markInstance.unmark();
-  markInstance.mark(searchTerm);
+  markInstance.mark(searchTerm,{
+
+
+    done:function(){
+
+      var els = document.getElementsByTagName('mark');
+      obWebviewInterface.emit('tnDebug','els length:' + els.length);
+      for(var i= 0; i < els.length; i++){
+        els[i].id = 'sr-' + i; 
+        searchResults.push({
+          id:els[i].id,
+          shortResult: els[i].parentElement.textContent
+        })
+      }
+    
+      obWebviewInterface.emit("tnSearch", searchResults);
+
+
+    }
+
+
+  });
   
 
 
-  var els = document.querySelectorAll('mark');
- 
-  for(var i= 0; i < els.length; i++){
-    els[i].id = 'sr-' + i; 
-    searchResults.push({
-      id:els[i].id,
-      shortResult: els[i].parentElement.textContent
-    })
-  }
 
-  obWebviewInterface.emit("tnSearch", JSON.stringify(searchResults));
-});
+};
+obWebviewInterface.on("twSearch", markTerm);
 
 function debug(text){
   obWebviewInterface.emit('tnDebug', text);
