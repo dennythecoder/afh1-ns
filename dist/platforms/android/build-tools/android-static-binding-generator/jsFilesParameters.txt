@@ -162,3 +162,5 @@
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/matrix/matrix.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/tns-core-modules/console/console.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-toast/toast.js
+/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-floatingactionbutton/fab.js
+/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/tns_modules/nativescript-floatingactionbutton/fab-common.js

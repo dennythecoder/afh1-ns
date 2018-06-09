@@ -1,4 +1,5 @@
 {
+    "nativescript-floatingactionbutton": true,
     "nativescript-fontawesome": true,
     "nativescript-fonticon": true,
     "nativescript-theme-core": true,

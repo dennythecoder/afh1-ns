@@ -1,5 +1,9 @@
 [
     {
+        "name": "nativescript-floatingactionbutton",
+        "directory": "../../node_modules/nativescript-floatingactionbutton"
+    },
+    {
         "name": "nativescript-fontawesome",
         "directory": "../../node_modules/nativescript-fontawesome"
     },

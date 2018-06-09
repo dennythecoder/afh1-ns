@@ -13,7 +13,8 @@
     "nativescript-webview-interface": "^1.4.2",
     "nativescript-fontawesome": "^1.0.0",
     "nativescript-fonticon": "^1.1.1",
-    "nativescript-toast": "^1.4.6"
+    "nativescript-toast": "^1.4.6",
+    "nativescript-floatingactionbutton": "^4.1.3"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",

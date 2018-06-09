@@ -5,14 +5,12 @@
   "readme": "Air Force Handbook 1",
   "nativescript": {
     "id": "mil.af.aetc.afh1",
-    "tns-ios": {
-      "version": "3.4.1"
-    },
     "tns-android": {
-      "version": "3.4.2"
+      "version": "3.4.3"
     }
   },
   "dependencies": {
+    "nativescript-floatingactionbutton": "^4.1.3",
     "nativescript-fontawesome": "^1.0.0",
     "nativescript-fonticon": "^1.1.1",
     "nativescript-theme-core": "^1.0.4",

@@ -26,7 +26,7 @@
         <TextField  v-model="searchTerm" />
         <ListView  for="result in searchResults" style="height:100%">
           <v-template>
-            <Button class="list-button" :text="result.shortResult" @tap="onSearchResultTap(result)" />
+            <Button class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result)" />
           </v-template>
         </ListView>
 
@@ -182,6 +182,13 @@ export default {
       if(app.android && platform.device.sdkVersion >= '21'){
         const window = app.android.startActivity;
       }*/
+    },
+    shorten(shortResult){
+      const idx = shortResult.indexOf(this.searchTerm);
+      if(idx === -1) return shortResult;
+      const start = idx > 50 ? idx-50 : 0;
+      const end = shortResult.length > idx + 50 ? idx + 50 : shortResult.length;
+      return shortResult.substring(start, end);
     },
     goto(mode) {
       this.mode = mode;
