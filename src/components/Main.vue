@@ -54,9 +54,9 @@
 
      </StackLayout>
         
-      <AbsoluteLayout row="0" class="sweet-button">
-        <Button   text="Hey"></Button>
-      </AbsoluteLayout>
+      <Fab  icon="res://markerpen" class="fa ab fab-button" >
+
+      </Fab>
    </GridLayout>
    
  
@@ -64,6 +64,15 @@
   </Page>
 </template>
 <style>
+
+.fab-button {
+    height: 70;
+    width: 70; 
+    margin: 15;
+    background-color: #ff4081; 
+    horizontal-align: right; 
+    vertical-align: bottom; 
+}
 
 .sweet-button{
   position:absolute;

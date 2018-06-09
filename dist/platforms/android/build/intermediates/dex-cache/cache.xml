@@ -12,12 +12,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dennis.headrick/.android/build-cache/de156d26b89610be8114a138d1c4eb1b6d4a6af5/output/jars/classes.jar"
+        jar="/Users/dennis.headrick/.android/build-cache/84fb466b4f0a2dc5c695b7203c4538fc3f4a6e5b/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
         sha1="3f21afecc70c3d68021c67561bd154ffff8f62cc">
-        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2/debug/classes_c31442e6ebe087adbc6f47b4d5d17f5a670df27f.jar" />
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2/debug/classes_2f51678046439f58da3bde68e343d6b0ffdb2e05.jar" />
     </item>
 
 </items>

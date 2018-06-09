@@ -14,6 +14,8 @@ TNSFontIcon.loadCss();
 
 Vue.filter('fonticon', fonticon);
 
+Vue.registerElement('Fab', ()=> require('nativescript-floatingactionbutton').Fab)
+
 // Uncommment the following to see NativeScript-Vue output logs
 //Vue.config.silent = false;
 
