@@ -1,63 +1,64 @@
 <template>
   <Page class="page" ref="page" @loaded="onLoaded">
-    <ActionBar style="background-color:#00529b;" title="">
+    <ActionBar style="background-color:#00529b;width:100%" title="">
       <!--using v-if instead of v-show creates error here-->
-      <WrapLayout v-show="mode !=='home'">
-        <Button :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
-        <Button :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
-        <Button :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
+      <WrapLayout>
+        <Button v-show="mode !=='home'" :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
+        <Button v-show="mode !=='toc' && mode !== 'home'" :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
+        <Button v-show="mode ==='reader'" :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
       </WrapLayout>
     </ActionBar>
-     <GridLayout>
-  
-       <StackLayout>
-      <!-- home -->
+    <StackLayout>
+       <ScrollView  v-show="mode==='home'" > 
+          <!-- home -->
+            <StackLayout >
+              <Image   src="~/images/af_logo.png" />
+              <Label  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
+              
+              <Button  v-for="route in routes" class="list-button" :text="route.name" @tap="goto(route.mode)"/>
+            </StackLayout>
+       </ScrollView>
 
-        <Image v-show="mode==='home'"  src="~/images/af_logo.png" />
-        <Label v-show="mode==='home'"  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
-        <ListView  v-show="mode==='home'" for="route in routes" style="height:100%;" >
-          <v-template>
-            <Button class="list-button" :text="route.name" @tap="goto(route.mode)"/>
-          </v-template>
-       </ListView>
+    
+
 
       <!--search --> 
-      <StackLayout v-show="mode==='search'">
-        <TextField  v-model="searchTerm" />
-        <ListView  for="result in searchResults" style="height:100%">
-          <v-template>
-            <Button class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result)" />
-          </v-template>
-        </ListView>
-
-      </StackLayout>
+      <ScrollView v-show="mode==='search'">
+        <StackLayout>
+          <TextField  v-model="searchTerm" />
+          <Button v-for="result in searchResults"  class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result)" />
+        </StackLayout>
+      </ScrollView>
 
       
    
       <!--chapters -->
-      <ListView for="chapter in chapters" v-show="mode==='chapters'">
-        <v-template>
-          <Button class="list-button" :text="chapter.name + '-' + chapter.title" @tap="onChapterTap(chapter)" />
-        </v-template>
-      </ListView>
+      <ScrollView v-show="mode==='chapters'">
+        <StackLayout>
+          <Button v-for="chapter in chapters"  class="list-button" :text="chapter.name + '-' + chapter.title" @tap="onChapterTap(chapter)" />
+        </StackLayout>
+      </ScrollView>
+
 
       <!--Bookmarks -->
-      <ListView for="bookmark in bookmarks" v-show="mode==='bookmarks'">
-        <v-template>
-          <Button class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)"/>
-        </v-template>
-      </ListView>
+
+
+      <ScrollView v-show="mode==='bookmarks'">
+        <StackLayout>
+          <Button v-for="bookmark in bookmarks"  class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
+        </StackLayout>
+      </ScrollView>
+
+
       <!--reader
         the reader stays loaded to preserve state and load with app
       -->
       <WebView id="webView" ref="webView" src="" @loadFinished="onWebViewLoad" />
 
-     </StackLayout>
+     
         
-      <Fab  icon="res://markerpen" class="fa ab fab-button" >
-
-      </Fab>
-   </GridLayout>
+      <Fab v-show="selection.length > 0" icon="res://markerpen" class="fa ab fab-button" ></Fab>
+   </StackLayout>
    
  
     
@@ -90,10 +91,18 @@ Image {
 
 .list-button {
   border-color: #00529b;
+  border-width: 1px;
+  width:90%;
+  
+  margin:auto;
+  margin-top:10px;
+  margin-bottom:10px;
+  height:20%;
+  min-height:100px;
   color: #00529b;
-  margin-left: 4px;
-  margin-right: 4px;
-  border-radius: 10px;
+  padding-left:6px;
+  padding-right:6px;
+  border-radius: 30%;
 }
 ScrollView,
 ListView,
@@ -148,7 +157,8 @@ export default {
       searchResults: [],
       navigatedRoutes: ["home"],
       isReadyToClose: false,
-      bookmarks:bookmarks
+      bookmarks:bookmarks,
+      selection:''
     };
   },
 
@@ -305,10 +315,15 @@ export default {
       );
       this.oWebViewInterface.on("tnCreateBookmark", this.onCreateBookmark);
       this.oWebViewInterface.on("tnSearch", this.onSearch);
+      this.oWebViewInterface.on("tnSelectionchange", this.onSelectionchange);
+
       this.oWebViewInterface.on("tnDebug", function(text) {
         alert(text);
       });
-    }  
+    },
+    onSelectionchange(val){
+       this.selection=val;
+    }
 
   }
 };

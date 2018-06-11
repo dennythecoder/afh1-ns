@@ -39,7 +39,13 @@ function searchNodesForText(searchText){
 }
 
 
+document.addEventListener('selectionchange', onSelectionChange);
 
+function onSelectionChange(){
+  var sel = window.getSelection();
+  var str = sel.toString();
+  obWebviewInterface.emit('tnSelectionchange',str);
+}
 
 
 
@@ -112,7 +118,6 @@ function markTerm(searchTerm) {
     done:function(){
 
       var els = document.getElementsByTagName('mark');
-      obWebviewInterface.emit('tnDebug','els length:' + els.length);
       for(var i= 0; i < els.length; i++){
         els[i].id = 'sr-' + i; 
         searchResults.push({
