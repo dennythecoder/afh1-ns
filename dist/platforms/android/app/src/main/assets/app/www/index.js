@@ -7,7 +7,139 @@ obWebviewInterface.on("twUpdateHash", function(hash) {
 });
 
 var nodes = [];
-var textContents = []
+var textContents = [];
+
+
+
+ 
+obWebviewInterface.on("twCreateHighlight", function(val){
+  if(!val){
+    var loc = highlightCurrent();
+    obWebviewInterface.emit("tnCreateHighlight", loc);
+  }
+
+
+});
+
+function highlightCurrent() {
+  let colour = 'yellow';
+  
+  let sel = window.getSelection();
+    
+  var location = getLocation();
+  var guid = createGuid();
+  document.designMode = "on";
+  document.execCommand("HiliteColor", false, colour);
+  if (colour !== "transparent") {
+    document.execCommand(
+      "createLink",
+      false,
+      `javascript:window.top.destroyHighlight("${guid}")`
+    );
+  } else {
+    document.execCommand("unlink", false);
+  }
+
+  document.designMode = "off";
+  var chapter = getChapterOfElement(sel.anchorNode.parentElement);
+  location.endLocation = getLocation();
+  location.guid = guid;
+  location.chapter = chapter;
+  sel.removeAllRanges();
+  return location;
+}
+
+
+
+function highlightRange(range, guid) {
+  let colour = 'yellow';
+  
+  let sel = window.getSelection();
+    
+  sel.removeAllRanges();
+  sel.addRange(range);
+  var location = getLocation();
+  if (!guid) guid = createGuid();
+  document.designMode = "on";
+  document.execCommand("HiliteColor", false, colour);
+  if (colour !== "transparent") {
+    document.execCommand(
+      "createLink",
+      false,
+      `javascript:window.top.destroyHighlight("${guid}")`
+    );
+  } else {
+    document.execCommand("unlink", false);
+  }
+  
+  document.designMode = "off";
+  location.endLocation = getLocation();
+  location.guid = guid;
+  return location;
+}
+
+
+
+
+function s4() {
+  return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+}
+function createGuid() {
+  return "guid-" + s4() + s4();
+}
+
+function pickOffset(node, location) {
+  return node.length < location.offset ? node.length - 1 : location.offset;
+}
+
+function findElInDocument(location) {
+  var elements = document.querySelectorAll(location.tagName);
+  for (var i = 0; i < elements.length; i++) {
+    if (elements[i].outerHTML === location.outerHTML) {
+      return elements[i];
+    }
+  }
+}
+
+function getNodeIndexInElement(element, node) {
+  for (let i = 0; i < element.childNodes.length; i++) {
+    if (element.childNodes[i] === node) {
+      return i;
+    }
+  }
+}
+
+function getNodeLocation(node) {
+  let parentElement = node.parentElement;
+  let tagName = parentElement.tagName,
+    className = parentElement.className,
+    index = getNodeIndexInElement(parentElement, node),
+    outerHTML = parentElement.outerHTML;
+  return { tagName:tagName, className:className, index:index, outerHTML:outerHTML };
+}
+
+function getLocation() {
+  var sel = window.getSelection(),
+    rng = sel.getRangeAt(0);
+  var start = getNodeLocation(rng.startContainer);
+  var end = getNodeLocation(rng.endContainer);
+
+  start.offset = rng.startOffset;
+  if (rng.startContainer === rng.endContainer) {
+    end.offset = start.offset + rng.toString().length;
+  } else {
+    end.offset = rng.endOffset;
+  }
+
+  let textContent = rng.toString();
+  return {
+    start:start,
+    end:end,
+    textContent:textContent
+  };
+}
+
+
 
 document.addEventListener('DOMContentLoaded',function(){
   var childNodes = document.getElementById('DIV-0').childNodes;
@@ -178,9 +310,9 @@ function getChapterOfElement(el){
 	// document.querySelectorAll('h2').forEach(a=>a.className = 'chapter')
 
 	if(chapters && chapters.length === 0) return document.createElement("div");
-	for(let i = 0; chapters.length - 1; i++){
+	for(var i = 0; i < chapters.length - 1; i++){
 	
-		if(chapters[i].offsetTop > el.offsetTop && i > 0){
+		if(chapters[i] && el && chapters[i].offsetTop > el.offsetTop && i > 0){
 			return chapters[i-1];
 		}
 	}
