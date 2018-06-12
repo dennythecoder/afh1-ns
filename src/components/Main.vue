@@ -8,15 +8,17 @@
         <Button v-show="mode ==='reader'" :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
       </WrapLayout>
     </ActionBar>
+    <!--Using GridLayout for FAB component-->
+    <GridLayout>
     <StackLayout>
+      
        <ScrollView  v-show="mode==='home'" > 
           <!-- home -->
-            <StackLayout >
-              <Image   src="~/images/af_logo.png" />
-              <Label  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
-              
-              <Button  v-for="route in routes" class="list-button" :text="route.name" @tap="goto(route.mode)"/>
-            </StackLayout>
+          <StackLayout >
+            <Image   src="~/images/af_logo.png" />
+            <Label  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
+            <Button  v-for="route in routes" class="list-button" :text="route.name" @tap="goto(route.mode)"/>
+          </StackLayout>
        </ScrollView>
 
     
@@ -26,7 +28,7 @@
       <ScrollView v-show="mode==='search'">
         <StackLayout>
           <TextField  v-model="searchTerm" />
-          <Button v-for="result in searchResults"  class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result)" />
+          <Button v-for="(result, idx) in searchResults"  class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result, idx)" />
         </StackLayout>
       </ScrollView>
 
@@ -49,6 +51,14 @@
         </StackLayout>
       </ScrollView>
 
+      <!--Highlights-->
+
+      <ScrollView v-show="mode==='highlights'">
+        <StackLayout>
+          <Button v-for="highlight in highlights"  class="list-button" :text="shorten(highlight.textContent)" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
+        </StackLayout>
+      </ScrollView>
+
 
       <!--reader
         the reader stays loaded to preserve state and load with app
@@ -57,9 +67,10 @@
 
      
         
-      <Fab v-show="selection.length > 0" icon="res://markerpen" class="fa ab fab-button" ></Fab>
    </StackLayout>
    
+    <Fab v-show="selection.length > 0" @tap="onHighlightTap" icon="~/images/pencil.png" class="fa ab fab-button" ></Fab>
+  </GridLayout>
  
     
   </Page>
@@ -140,11 +151,15 @@ import {
 } from "tns-core-modules/application";
 import chapters from "../scripts/chapters";
 
+import MainEventHandlers from "./MainEventHandlers";
+
 var appSettings = require("application-settings");
 
 var bookmarks = appSettings.getString("bookmarks");
 bookmarks = bookmarks ? JSON.parse(bookmarks) : [];
 
+var highlights = appSettings.getString("highlights");
+highlights = highlights ? JSON.parse(highlights) : [];
 
 export default {
   data() {
@@ -158,7 +173,9 @@ export default {
       navigatedRoutes: ["home"],
       isReadyToClose: false,
       bookmarks:bookmarks,
-      selection:''
+      highlights:highlights,
+      selection:'',
+      searchResultIndex:-1
     };
   },
 
@@ -189,19 +206,7 @@ export default {
   },
 
   methods: {
-    onLoaded(args){
-     /*
-      const platform = require("platform");
-      const color = require("color");
-      const page = args.object;
-      page.bindingContext = data;
-      const View = android.view.View;*/
-      /*
-      const app = require("application");
-      if(app.android && platform.device.sdkVersion >= '21'){
-        const window = app.android.startActivity;
-      }*/
-    },
+    ...MainEventHandlers,
     shorten(shortResult){
       const idx = shortResult.indexOf(this.searchTerm);
       if(idx === -1) return shortResult;
@@ -226,104 +231,8 @@ export default {
     },
     shorten(text) {
       return text.length > 140 ? text.substr(0, 140) + "..." : text;
-    },
-    onChapterTap(chapter) {
-      this.updateHash(chapter.id);
-      this.goto("reader");
-    },
-    onSearchResultTap(searchResult){
-      this.updateHash(searchResult.id);
-      this.goto("reader");
-    },
-    onBookmarkTap(bookmark) {
-      this.updateHash(bookmark.id);
-      this.goto("reader");
-    },
-    onBookmarkLongPress(bookmark){
-      confirm("Would you like to delete this bookmark?").then((result)=>{
-        if(result){
-          for(var i = 0; i < this.bookmarks.length; i++){
-            if(bookmark === this.bookmarks[i]){
-              this.bookmarks.splice(i);
-              appSettings.setString("bookmarks", JSON.stringify(this.bookmarks));
-              Toast.makeText("Bookmark Deleted").show();
-              if(this.bookmarks.length === 0){
-                this.mode = 'home';
-              }
-            }
-          }
-        }
-      });
-    },
-    onCreateBookmark(bookmark){
-      this.bookmarks.push(bookmark);
-
-      appSettings.setString("bookmarks", JSON.stringify(this.bookmarks));
-      Toast.makeText("Bookmark Created").show();
-    },
-    onSearch(results) {
-      this.$set(this, "searchResults", results);
-    },
-
-    updateHash(hash) {
-      if (this.oWebViewInterface) {
-        this.oWebViewInterface.emit("twUpdateHash", hash);
-      } else {
-        this.src = "~/www/afh1.html#" + hash;
-      }
-    },
-
-    onWebViewLoad() {
-      const nativeView = this.$refs.webView.nativeView;
-      const android = nativeView.android;
-
-      if (!nativeView.android && !nativeView.ios) {
-        setTimeout(this.onWebViewLoad, 100);
-        return;
-      }
-
-    
-
-      if (this._handlersApplied === true) return;
-      this._handlersApplied = true;
-      if (android) {
-        android.getSettings().setAllowFileAccess(true);
-        android.getSettings().setAllowFileAccessFromFileURLs(true);
-        android.getSettings().setDisplayZoomControls(false);
-
-        application.android.on(
-          AndroidApplication.activityBackPressedEvent,
-          data => {
-            if (this.navigatedRoutes.length >= 2) {
-              data.cancel = true;
-              this.goBack();
-            } else {
-              //let it exit
-            }
-          }
-        );
-
-        /*
-        const activity = application.android.startActivity;
-        const win = activity.getWindow();
-        win.addFlags(android.viewWindowManager.LayoutParams.FLAG_FULLSCREEN);*/
-      }
-
-      this.oWebViewInterface = new webViewInterfaceModule.WebViewInterface(
-        nativeView,
-        this.src
-      );
-      this.oWebViewInterface.on("tnCreateBookmark", this.onCreateBookmark);
-      this.oWebViewInterface.on("tnSearch", this.onSearch);
-      this.oWebViewInterface.on("tnSelectionchange", this.onSelectionchange);
-
-      this.oWebViewInterface.on("tnDebug", function(text) {
-        alert(text);
-      });
-    },
-    onSelectionchange(val){
-       this.selection=val;
     }
+  
 
   }
 };
