@@ -55,7 +55,7 @@
 
       <ScrollView v-show="mode==='highlights'">
         <StackLayout>
-          <Button v-for="highlight in highlights"  class="list-button" :text="shorten(highlight.textContent)" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
+          <Button v-for="highlight in highlights"  class="list-button" :text="highlight.chapter + ' ' + shorten(highlight.textContent)" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
         </StackLayout>
       </ScrollView>
 
@@ -189,10 +189,14 @@ export default {
         { name: "Chapters", mode: "chapters" },
         { name: "Continue Reading", mode: "reader" },
         { name: "Search", mode: "search" }
+      
         
       ];
       if(this.bookmarks.length > 0){
         routes.push( { name: "Bookmarks", mode: "bookmarks"});
+      }
+      if(this.highlights.length > 0){
+        routes.push( { name: "Highlights", mode: "highlights" });
       }
       return routes;
     }

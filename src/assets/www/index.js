@@ -44,11 +44,53 @@ function highlightCurrent() {
   var chapter = getChapterOfElement(sel.anchorNode.parentElement);
   location.endLocation = getLocation();
   location.guid = guid;
-  location.chapter = chapter;
+  location.chapter = chapter.textContent.trim();
   sel.removeAllRanges();
   return location;
 }
 
+
+function highlightLocations(locations) {
+  let colour = 'yellow';
+  
+  let sel = window.getSelection();
+  
+  sel.removeAllRanges();
+  sel.addRange(range);
+  var location = getLocation();
+  if (!guid) guid = createGuid();
+  document.designMode = "on";
+  document.execCommand("HiliteColor", false, colour);
+  if (colour !== "transparent") {
+    document.execCommand(
+      "createLink",
+      false,
+      'javascript:window.top.destroyHighlight("' + guid + '")'
+    );
+  } else {
+    document.execCommand("unlink", false);
+  }
+  
+  document.designMode = "off";
+  location.endLocation = getLocation();
+  location.guid = guid;
+  return location;
+}
+
+function createRange(start, end) {
+  let startEl = findEl(start);
+  let endEl = findEl(end);
+  if (!startEl || !endEl) return;
+  window.doc = document;
+  let startNode = startEl.childNodes[start.index];
+  let endNode = endEl.childNodes[end.index];
+  let range = document.createRange();
+  let startOffset = pickOffset(startNode, start);
+  let endOffset = pickOffset(endNode, end);
+  range.setStart(startNode, startOffset);
+  range.setEnd(endNode, endOffset);
+  return range;
+}
 
 
 function highlightRange(range, guid) {
@@ -92,13 +134,14 @@ function pickOffset(node, location) {
   return node.length < location.offset ? node.length - 1 : location.offset;
 }
 
-function findElInDocument(location) {
-  var elements = document.querySelectorAll(location.tagName);
+function findEl(location) {
+ /* var elements = document.querySelectorAll(location.tagName);
   for (var i = 0; i < elements.length; i++) {
     if (elements[i].outerHTML === location.outerHTML) {
       return elements[i];
     }
-  }
+  }*/
+  return document.getElementById(location.id);
 }
 
 function getNodeIndexInElement(element, node) {
@@ -114,8 +157,9 @@ function getNodeLocation(node) {
   let tagName = parentElement.tagName,
     className = parentElement.className,
     index = getNodeIndexInElement(parentElement, node),
-    outerHTML = parentElement.outerHTML;
-  return { tagName:tagName, className:className, index:index, outerHTML:outerHTML };
+    outerHTML = parentElement.outerHTML,
+    id = parentElement.id;
+  return { tagName:tagName, className:className, index:index, outerHTML:outerHTML, id:id };
 }
 
 function getLocation() {
