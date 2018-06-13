@@ -258,16 +258,17 @@ function removeSearch() {
   }
 }
 var bodyText,chapters;
-
+var markInstance;
 document.addEventListener("DOMContentLoaded", function() {
   bodyText = document.body.textContent,
   chapters = document.querySelectorAll("[id^='chapter']");
+  markInstance = new Mark(document.body);
 });
 
 function markTerm(searchTerm) {
 
   
-  var markInstance = new Mark(document.body);
+   
     
  
   removeSearch();
@@ -275,12 +276,16 @@ function markTerm(searchTerm) {
 
 
   if (searchTerm.length < 4) {
+    markInstance.unmark();
+    obWebviewInterface.emit("tnSearch", []);
     return;
   }
   var regex =  new RegExp(searchTerm);
   regex.ignoreCase = true;
   regex.global = true;
-  if((bodyText.match(regex) || []).length > 100){
+
+
+  if(bodyText && (bodyText.match(regex) || []).length > 100){
     return [
      { shortResult:'Too many matches.  Try a more specific search.' }
     ]

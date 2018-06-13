@@ -6,6 +6,7 @@
         <Button v-show="mode !=='home'" :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
         <Button v-show="mode !=='toc' && mode !== 'home'" :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
         <Button v-show="mode ==='reader'" :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
+        <Button v-show="searchResults.length > 0" text="Clear" @tap="searchTerm=''" class="ab" />
       </WrapLayout>
     </ActionBar>
     <!--Using GridLayout for FAB component-->
