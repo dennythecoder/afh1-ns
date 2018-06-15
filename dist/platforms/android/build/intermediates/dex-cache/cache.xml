@@ -8,16 +8,16 @@
         optimize="true"
         revision="26.0.3"
         sha1="76c82949e18be2e64a13fcf1587898f426846790">
-        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2/debug/WebViewInterface_6f4188cb32ea4a8905e92111bcd4bb2ba6aa1334.jar" />
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2F3/debug/WebViewInterface_6f4188cb32ea4a8905e92111bcd4bb2ba6aa1334.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/dennis.headrick/.android/build-cache/84fb466b4f0a2dc5c695b7203c4538fc3f4a6e5b/output/jars/classes.jar"
+        jar="/Users/dennis.headrick/.android/build-cache/85f46cc797b1c75f7ae92e5d68f00a5a0384a7d1/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.3"
         sha1="3f21afecc70c3d68021c67561bd154ffff8f62cc">
-        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2/debug/classes_2f51678046439f58da3bde68e343d6b0ffdb2e05.jar" />
+        <dex dex="/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/build/intermediates/pre-dexed/F0F1F2F3/debug/classes_bb2d9569709b01380c10e615b5130c5a005b0247.jar" />
     </item>
 
 </items>

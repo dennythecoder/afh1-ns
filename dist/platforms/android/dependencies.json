@@ -1,5 +1,9 @@
 [
     {
+        "name": "nativescript-clipboard",
+        "directory": "../../node_modules/nativescript-clipboard"
+    },
+    {
         "name": "nativescript-floatingactionbutton",
         "directory": "../../node_modules/nativescript-floatingactionbutton"
     },
@@ -10,6 +14,10 @@
     {
         "name": "nativescript-fonticon",
         "directory": "../../node_modules/nativescript-fonticon"
+    },
+    {
+        "name": "nativescript-social-share",
+        "directory": "../../node_modules/nativescript-social-share"
     },
     {
         "name": "nativescript-theme-core",

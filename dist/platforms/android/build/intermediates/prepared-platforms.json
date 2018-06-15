@@ -1,7 +1,9 @@
 {
+    "nativescript-clipboard": true,
     "nativescript-floatingactionbutton": true,
     "nativescript-fontawesome": true,
     "nativescript-fonticon": true,
+    "nativescript-social-share": true,
     "nativescript-theme-core": true,
     "nativescript-toast": true,
     "nativescript-vue": true,
