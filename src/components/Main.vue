@@ -3,9 +3,9 @@
     <ActionBar style="background-color:#00529b;width:100%" title="">
       <!--using v-if instead of v-show creates error here-->
       <WrapLayout>
-        <Button v-show="mode !=='home'" :text="'fa-home' | fonticon" class="fa ab" @tap="goto('home')" />
-        <Button v-show="mode !=='toc' && mode !== 'home'" :text="'fa-bars' | fonticon" class="fa ab" @tap="goto('chapters')" />
-        <Button v-show="mode ==='reader'" :text="'fa-bookmark' | fonticon" class="fa ab" @tap="createBookmark" />
+        <Button v-show="mode !=='home'" backgroundImage="~/images/home.png" class="ab" @tap="goto('home')" />
+        <Button v-show="mode !=='chapters' && mode !== 'home'" backgroundImage="~/images/bars.png" class="ab" @tap="goto('chapters')" />
+        <Button v-show="mode ==='reader'" backgroundImage="~/images/bookmark.png" class="ab" @tap="createBookmark" />
         <Button v-show="searchResults.length > 0" text="Clear" @tap="searchTerm=''" class="ab" />
       </WrapLayout>
     </ActionBar>
@@ -18,7 +18,7 @@
           <StackLayout >
             <Image   src="~/images/af_logo.png" />
             <Label  id="handbook-1-title" text="Handbook 1 (2017)" style="padding-bottom:" />
-            <Button  v-for="route in routes" class="list-button" :text="route.name" @tap="goto(route.mode)"/>
+            <Button  v-for="route in routes" :key="route" class="list-button" :text="route.name" @tap="goto(route.mode)"/>
           </StackLayout>
        </ScrollView>
 
@@ -29,7 +29,7 @@
       <ScrollView v-show="mode==='search'">
         <StackLayout>
           <TextField  v-model="searchTerm" />
-          <Button v-for="(result, idx) in searchResults"  class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result, idx)" />
+          <Button v-for="(result, idx) in searchResults" :key="result.shortResult"  class="list-button" :text="shorten(result.shortResult)" @tap="onSearchResultTap(result, idx)" />
         </StackLayout>
       </ScrollView>
 
@@ -38,7 +38,7 @@
       <!--chapters -->
       <ScrollView v-show="mode==='chapters'">
         <StackLayout>
-          <Button v-for="chapter in chapters"  class="list-button" :text="chapter.name + '-' + chapter.title" @tap="onChapterTap(chapter)" />
+          <Button v-for="chapter in chapters" :key="chapter.name"  class="list-button" :text="chapter.name + '-' + chapter.title" @tap="onChapterTap(chapter)" />
         </StackLayout>
       </ScrollView>
 
@@ -48,7 +48,7 @@
 
       <ScrollView v-show="mode==='bookmarks'">
         <StackLayout>
-          <Button v-for="bookmark in bookmarks"  class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
+          <Button v-for="bookmark in bookmarks" :key="bookmark.id"  class="list-button" :text="bookmark.chapter" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
         </StackLayout>
       </ScrollView>
 
@@ -56,7 +56,7 @@
 
       <ScrollView v-show="mode==='highlights'">
         <StackLayout>
-          <Button v-for="highlight in highlights"  class="list-button" :text="highlight.chapter + ' ' + shorten(highlight.textContent)" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
+          <Button v-for="highlight in highlights" :key="highlight.id" class="list-button" :text="highlight.chapter + ' ' + shorten(highlight.textContent)" @tap="onBookmarkTap(bookmark)" @longpress="onBookmarkLongPress(bookmark)" />
         </StackLayout>
       </ScrollView>
 
@@ -70,7 +70,7 @@
         
    </StackLayout>
    
-    <Fab v-show="selection.length > 0" @tap="onHighlightTap" icon="~/images/pencil.png" class="fa ab fab-button" ></Fab>
+    <Fab v-show="selection.length > 0" @tap="onHighlightTap" @long-press="onLongPress" icon="~/images/pencil.png" class="fa ab fab-button" ></Fab>
   </GridLayout>
  
     
@@ -132,7 +132,19 @@ WebView {
 .ab {
   background-color: #00529b;
   color: white;
+  width:50;
+  height:50;
+  margin:5 5;
+  
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  border-color:black;
+  
 }
+
+
+
 
 .action-bar{
   background-color: #00529b;
@@ -141,6 +153,8 @@ WebView {
 
 
 <script>
+
+
 import * as webViewModule from "tns-core-modules/ui/web-view";
 import webViewInterfaceModule from "nativescript-webview-interface";
 //import appSettings from "tns-core-modules/application-settings";
@@ -153,6 +167,9 @@ import {
 import chapters from "../scripts/chapters";
 
 import MainEventHandlers from "./MainEventHandlers";
+
+var SocialShare = require("nativescript-social-share");
+var Copy = require("nativescript-clipboard");
 
 var appSettings = require("application-settings");
 
@@ -212,6 +229,9 @@ export default {
 
   methods: {
     ...MainEventHandlers,
+    onLongPress(){
+      return true;
+    },
     shorten(shortResult){
       const idx = shortResult.indexOf(this.searchTerm);
       if(idx === -1) return shortResult;
@@ -229,6 +249,12 @@ export default {
         this.navigatedRoutes.splice(this.navigatedRoutes.length - 1, 1);
         this.mode = this.navigatedRoutes[this.navigatedRoutes.length - 1];
       }
+    },
+    gotoNextSearchResult(){
+
+    },
+    gotoPreviousSearchResult(){
+
     },
 
     createBookmark(){

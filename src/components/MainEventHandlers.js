@@ -7,7 +7,14 @@ import {
   AndroidApplication
 } from "tns-core-modules/application";
 
+
+import * as View from "tns-core-modules/ui/core/view";
+
 var appSettings = require("application-settings");
+
+function grabAndroid(){
+    return android;
+}
 
 export default { 
 
@@ -67,14 +74,23 @@ export default {
   
       onWebViewLoad() {
         const nativeView = this.$refs.webView.nativeView;
+       
         const android = nativeView.android;
-  
+        
+        
         if (!nativeView.android && !nativeView.ios) {
           setTimeout(this.onWebViewLoad, 100);
           return;
         }
+       
   
-      
+  /*
+        android.setOnLongClickListener({
+            onLongClick(v){
+                return true;
+            }            
+        });*/
+        
   
         if (this._handlersApplied === true) return;
         this._handlersApplied = true;
@@ -82,7 +98,8 @@ export default {
           android.getSettings().setAllowFileAccess(true);
           android.getSettings().setAllowFileAccessFromFileURLs(true);
           android.getSettings().setDisplayZoomControls(false);
-  
+          
+
           application.android.on(
             AndroidApplication.activityBackPressedEvent,
             data => {
