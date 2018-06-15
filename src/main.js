@@ -4,20 +4,14 @@ import Main from './components/Main'
 
 import './styles.scss';
 
-import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 
-TNSFontIcon.debug = true;
-TNSFontIcon.paths = {
-  'fa': './font-awesome.css'
-};
-TNSFontIcon.loadCss();
-
-Vue.filter('fonticon', fonticon);
 
 Vue.registerElement('Fab', ()=> require('nativescript-floatingactionbutton').Fab)
 
 // Uncommment the following to see NativeScript-Vue output logs
 //Vue.config.silent = false;
+
+console.warn('my android', android);
 
 new Vue({
 
