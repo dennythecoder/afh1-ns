@@ -259,15 +259,34 @@ function removeSearch() {
 }
 var bodyText,chapters;
 var markInstance;
+var sFn;
+
+
 document.addEventListener("DOMContentLoaded", function() {
   bodyText = document.body.textContent,
   chapters = document.querySelectorAll("[id^='chapter']");
   markInstance = new Mark(document.body);
 
-  var lazyLoad = new lazyLoad();
+  var lazyLoad = new LazyLoad({data_src:'src'});
+
+  if(sFn){
+    sFn();
+  }
 });
 
-function markTerm(searchTerm) {
+
+
+function markTerm(searchTerm){
+  if(document.readyState === 'complete'){
+    _markTerm(searchTerm);
+  }else{
+    sFn = function(){ _markTerm(searchTerm); };
+  }
+}
+
+
+
+function _markTerm(searchTerm) {
 
   
    
