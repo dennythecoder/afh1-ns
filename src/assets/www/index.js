@@ -263,6 +263,8 @@ document.addEventListener("DOMContentLoaded", function() {
   bodyText = document.body.textContent,
   chapters = document.querySelectorAll("[id^='chapter']");
   markInstance = new Mark(document.body);
+
+  var lazyLoad = new lazyLoad();
 });
 
 function markTerm(searchTerm) {
