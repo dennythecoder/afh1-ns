@@ -1,4 +1,5 @@
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/app.js
+/Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/lazyload.min.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/mark.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/index.js
 /Users/dennis.headrick/Desktop/afh1-ns/dist/platforms/android/app/src/main/assets/app/www/nativescript-webview-interface.js

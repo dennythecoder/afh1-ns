@@ -8,13 +8,9 @@ import {
 } from "tns-core-modules/application";
 
 
-import * as View from "tns-core-modules/ui/core/view";
-
 var appSettings = require("application-settings");
 
-function grabAndroid(){
-    return android;
-}
+
 
 export default { 
 
@@ -26,8 +22,14 @@ export default {
         this.oWebViewInterface.emit("twCreateHighlight");
       },
       onSearchResultTap(searchResult){
+        this.currentSearchResult = searchResult.id;
         this.updateHash(searchResult.id);
         this.goto("reader");
+        this.$nextTick(()=>{
+          this.displayText = this.currentSearchResultPosition + ' of ' + this.searchResults.length;
+        }
+        
+        );
       },
       onBookmarkTap(bookmark) {
         this.updateHash(bookmark.id);
@@ -82,15 +84,19 @@ export default {
           setTimeout(this.onWebViewLoad, 100);
           return;
         }
-       
-  
-  /*
-        android.setOnLongClickListener({
-            onLongClick(v){
-                return true;
-            }            
-        });*/
+   
+        /*
+        android.setOnLongClickListener(
+            new this.$os.android.view.View.OnLongClickListener({
+                onLongClick(v){
+                    return true;
+                }    
+
+
+            })
         
+        );
+        */
   
         if (this._handlersApplied === true) return;
         this._handlersApplied = true;
